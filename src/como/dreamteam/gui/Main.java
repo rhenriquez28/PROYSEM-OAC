@@ -97,7 +97,7 @@ public class Main {
             	scroll.add(new InterruptionSolverAnimation(iSolver.getFocusSimulation()));
             	frame.add(scroll,BorderLayout.CENTER);
             	frame.getContentPane().add(scroll);
-    	 
+            	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     			frame.setVisible(true);
             }
 });
