@@ -118,12 +118,15 @@ public class InterruptionSolver {
 					else
 					{
 						bitacora[i][2]="N";
-					}
+					
 					bitacora[i][3]=fwindow.getFocusBegining()+"-"+fwindow.getFocusEnding();
 					bitacora[i][4]=fwindow.getInterruptionRemainingTime()+"";
 				}
 			}
+				
 		}
+		
+	}
 		return bitacora;
 	}
 	public static void main(String args[])
@@ -153,7 +156,7 @@ public class InterruptionSolver {
 		            	scroll.add(new InterruptionSolverAnimation(iSolver.getFocusSimulation()));
 		            	frame.add(scroll,BorderLayout.CENTER);
 		            	frame.getContentPane().add(scroll);
-		    	 
+		            	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		    			frame.setVisible(true);
 		            }
 		        });
