@@ -12,11 +12,10 @@ public class Main {
 	public static void main(String[] args) {
 		JOptionPane.showMessageDialog(null, "Bienvenido al simulador 2017");
 		String nombre;
-		int prio, j=0, k=0;
+		int prio, j=0;
 		boolean aye=false;
 		String nombres[];
 		String options[] ={"Si", "No"};
-		int tiempo[] = new int [100], duracion[] = new int [100];
 		ArrayList<Device> dvc = new ArrayList<Device>();
 		dvc.add(new Device("main", Integer.MAX_VALUE-1));
 		do{
@@ -24,7 +23,7 @@ public class Main {
 			prio=Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca el numero de prioridad"));
 			dvc.add(new Device(nombre, prio));
 			j=JOptionPane.showOptionDialog(null, 
-					"Desea agregar mas dispositivos? (S/N)", 
+					"Desea agregar mas dispositivos?", 
 				    "Pregunta", 
 				    JOptionPane.YES_NO_OPTION, 
 				    JOptionPane.QUESTION_MESSAGE, 
@@ -69,7 +68,7 @@ public class Main {
 
 			itrs.add(new Interruption(time, dvc.get(interNum), duration));
 			j=JOptionPane.showOptionDialog(null, 
-				"Desea agregar mas interrupcciones? (S/N)", 
+				"Desea agregar mas interrupcciones?", 
 			    "Pregunta", 
 			    JOptionPane.YES_NO_OPTION, 
 			    JOptionPane.QUESTION_MESSAGE, 
@@ -81,10 +80,10 @@ public class Main {
 		InterruptionSolver iSolver = new InterruptionSolver(itrs);
 		iSolver.solveSimulation();
 		int cantTiemposBitacora =Integer.parseInt(JOptionPane.showInputDialog(null, "¿Cuantos tiempos necesita en la bitacora?"));
-		tiempo = new int[cantTiemposBitacora];
+		int tiempo[] = new int[cantTiemposBitacora];
 		for(int i =0; i<cantTiemposBitacora; i++)
 		{
-			tiempo[i]=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el tiempo"+i+1+"de la bitacora"));
+			tiempo[i]=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el tiempo "+(i+1)+" de la bitacora"));
 		}
 		matrixResult mr = new matrixResult(iSolver.generarBitacora(tiempo), new String[]{"Tiempo","Area","I(S/N)","Rango","Tiempo restante"});
 		mr.showme();
