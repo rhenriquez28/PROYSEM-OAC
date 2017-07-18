@@ -71,7 +71,7 @@ public class InterruptionSolver {
 						if(focusSimulation.size()>0)
 						{
 							focusSimulation.get(focusSimulation.size()-1).setFocusEnding(tick);	
-							focusSimulation.get(focusSimulation.size()-1).setInterruptionRemainingTime(focusInterruption.getDuration());
+							focusSimulation.get(focusSimulation.size()-1).setInterruptionRemainingTime(focusSimulation.get(focusSimulation.size()-1).getInterruption().getDuration());
 						}		
 						focusSimulation.add(new FocusWindow(focusInterruption,tick));
 					}
@@ -105,24 +105,27 @@ public class InterruptionSolver {
 		String[][] bitacora = new String[tiempos.length][5];
 		for( int i= 0; i<tiempos.length;i++)
 		{
-			bitacora[i][0]= ""+i;
+			bitacora[i][0]= ""+tiempos[i];
 			for(FocusWindow fwindow: focusSimulation)
 			{
-				if(i>=fwindow.getFocusBegining() && i<=fwindow.getFocusEnding())
+				if(tiempos[i]>=fwindow.getFocusBegining() && tiempos[i]<=fwindow.getFocusEnding())
 				{
 					bitacora[i][1]=fwindow.getInterruption().getDevice().getName();
 					if(fwindow.getInterruptionRemainingTime()>0)
 					{
 						bitacora[i][2]="S";
+						bitacora[i][3]=fwindow.getFocusBegining()+"-"+fwindow.getFocusEnding();
+						bitacora[i][4]=fwindow.getInterruptionRemainingTime()+"";
 					}
 					else
 					{
 						bitacora[i][2]="N";
+						bitacora[i][3]=fwindow.getFocusBegining()+"-"+fwindow.getFocusEnding();
+						bitacora[i][4]=fwindow.getInterruptionRemainingTime()+"";
 					
-					bitacora[i][3]=fwindow.getFocusBegining()+"-"+fwindow.getFocusEnding();
-					bitacora[i][4]=fwindow.getInterruptionRemainingTime()+"";
+					
+					}
 				}
-			}
 				
 		}
 		

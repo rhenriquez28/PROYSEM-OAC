@@ -20,7 +20,7 @@ public class Main {
 		ArrayList<Device> dvc = new ArrayList<Device>();
 		dvc.add(new Device("main", Integer.MAX_VALUE-1));
 		do{
-			nombre=JOptionPane.showInputDialog(null, "Introduzca el nombre de un dispositivo que va a formar parte de la simulacion");
+			nombre=JOptionPane.showInputDialog(null, "Introduzca el nombre de los un dispositivo que va a formar parte de la simulacion");
 			prio=Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca el numero de prioridad"));
 			dvc.add(new Device(nombre, prio));
 			j=JOptionPane.showOptionDialog(null, 
@@ -54,22 +54,22 @@ public class Main {
 	  /*  interruption=interruption+1;
 	  JOptionPane.OK_CANCEL_OPTION,*/
 			int interNum=0;
+			j=0;
 			do{
-				if (interruption==nombres[j]){
+				if (interruption.equals(nombres[j])){
 					interNum=j;
 					aye=true;
 				}
 				j++;
 			}while(aye!=true);
-	    
+	    aye=false;
 			int time = Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el segundo en el que se hara la interrupcion:"));
-			tiempo[k]=time;
+
 			int duration = Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte cuantos segundos tardara la interrupcion:"));
-			duracion[k]=duration;
-			k++;
+
 			itrs.add(new Interruption(time, dvc.get(interNum), duration));
 			j=JOptionPane.showOptionDialog(null, 
-				"Desea agregar mas dispositivos? (S/N)", 
+				"Desea agregar mas interrupcciones? (S/N)", 
 			    "Pregunta", 
 			    JOptionPane.YES_NO_OPTION, 
 			    JOptionPane.QUESTION_MESSAGE, 
@@ -80,9 +80,14 @@ public class Main {
 		
 		InterruptionSolver iSolver = new InterruptionSolver(itrs);
 		iSolver.solveSimulation();
-		
-		matrixResult mr = new matrixResult(iSolver.generarBitacora(tiempo), nombres);
-		mr.getModel1();
+		int cantTiemposBitacora =Integer.parseInt(JOptionPane.showInputDialog(null, "¿Cuantos tiempos necesita en la bitacora?"));
+		tiempo = new int[cantTiemposBitacora];
+		for(int i =0; i<cantTiemposBitacora; i++)
+		{
+			tiempo[i]=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el tiempo"+i+1+"de la bitacora"));
+		}
+		matrixResult mr = new matrixResult(iSolver.generarBitacora(tiempo), new String[]{"Tiempo","Area","I(S/N)","Rango","Tiempo restante"});
+		mr.showme();
 		
 		SwingUtilities.invokeLater(new Runnable() {
             public void run() {
