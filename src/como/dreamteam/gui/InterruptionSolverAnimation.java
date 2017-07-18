@@ -65,7 +65,7 @@ public class InterruptionSolverAnimation extends JPanel {
 	}
 	@Override
     public Dimension getPreferredSize() {
-        return new Dimension(3000, fwindow.get(fwindow.size()-1).getFocusEnding()*20);
+        return new Dimension(3000, (fwindow.get(fwindow.size()-1).getFocusEnding()+4)*20);
     }
 
 	
@@ -77,7 +77,7 @@ public class InterruptionSolverAnimation extends JPanel {
 	   g2.setFont(new Font("TimesRoman", Font.PLAIN,24));
 	   int i=0;
 	   int lastStringWidth =0;
-	   int lastStringPos=0;
+	   int lastStringPos=10;
 	   
 	   for(Device idev: uniqueDevices)
 		{
@@ -90,10 +90,11 @@ public class InterruptionSolverAnimation extends JPanel {
 			
 		}
 	   g2.setFont(new Font("TimesRoman", Font.PLAIN,20));
+	   g2.drawString("0",0,(4)*20);
 	   for(int y =1; y<=fwindow.get(fwindow.size()-1).getFocusEnding();y++)
 		{
-			g2.drawLine(0, (y+1)*20,lastStringPos+lastStringWidth, (y+1)*20);
-			g2.drawString(y-1+"",0,(y+1)*20);
+			g2.drawLine(0, (y+4)*20,lastStringPos+lastStringWidth, (y+4)*20);
+			g2.drawString(y+"",0,(y+4)*20);
 		}
 	}
 	public void redraw()
@@ -117,12 +118,12 @@ public class InterruptionSolverAnimation extends JPanel {
 			{
 				for(FocusWindow ifw: fwindow)
 				{
-					if(time>=ifw.getFocusBegining() && time <= ifw.getFocusEnding())
+					if(time>=ifw.getFocusBegining() && time < ifw.getFocusEnding())
 					{
 						Device idev = ifw.getInterruption().getDevice();
 						Integer[] pos = devicePositions.get(idev);
 						g2.setColor(Color.BLUE);
-						g2.fillRect(pos[0], (time+1)*20, pos[1], 20);
+						g2.fillRect(pos[0], (time+4)*20, pos[1], 20);
 					}
 				}
 			}
