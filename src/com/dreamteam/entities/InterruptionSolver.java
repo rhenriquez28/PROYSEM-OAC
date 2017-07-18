@@ -1,8 +1,17 @@
 package com.dreamteam.entities;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.ScrollPane;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import como.dreamteam.gui.InterruptionSolverAnimation;
 
 public class InterruptionSolver {
 	private ArrayList<Interruption> interrupcciones;
@@ -135,6 +144,18 @@ public class InterruptionSolver {
 			
 			InterruptionSolver iSolver = new InterruptionSolver(itrs);
 			iSolver.solveSimulation();
-			System.out.println("");
+			
+			  SwingUtilities.invokeLater(new Runnable() {
+		            public void run() {
+		            	JFrame  frame = new JFrame();
+		            	
+		            	ScrollPane scroll = new ScrollPane();
+		            	scroll.add(new InterruptionSolverAnimation(iSolver.getFocusSimulation()));
+		            	frame.add(scroll,BorderLayout.CENTER);
+		            	frame.getContentPane().add(scroll);
+		    	 
+		    			frame.setVisible(true);
+		            }
+		        });
 	}
 }
