@@ -126,7 +126,7 @@ public class InterruptionSolver {
 		}
 		return bitacora;
 	}
-	public static void main(String args[])
+	/*public static void main(String args[])
 	{
 			ArrayList<Interruption> itrs = new ArrayList<Interruption>();
 			Device com = new Device("Com3",12);
@@ -157,5 +157,5 @@ public class InterruptionSolver {
 		    			frame.setVisible(true);
 		            }
 		        });
-	}
+	}*/
 }
