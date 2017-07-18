@@ -9,37 +9,75 @@ import com.dreamteam.entities.InterruptionSolver;
 
 public class Main {
 
-	public static void main(String[] args) {
-		JOptionPane.showMessageDialog(null, "Bienvenido al simulador 2017");
-		String nombre;
-		int prio, j=0;
+	public static void main(String[] args)throws Exception {
+		JOptionPane.showMessageDialog(null, "Bienvenido al simulador interrupciones 2k17");
+		String nombre = null;
+		int prio = 0, j=0;
+		int main = 0;
+		int time=0;
+		int duration=0;
+		int cantTiemposBitacora =0;
+		boolean aye2=false;
 		boolean aye=false;
 		String nombres[];
 		String options[] ={"Si", "No"};
 		ArrayList<Device> dvc = new ArrayList<Device>();
+		
+		
 		dvc.add(new Device("main", Integer.MAX_VALUE-1));
+		//Itroducción de dispositivos y su prioridad
 		do{
 			nombre=JOptionPane.showInputDialog(null, "Introduzca el nombre de los un dispositivo que va a formar parte de la simulacion");
-			prio=Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca el numero de prioridad"));
+			
+			do {
+			
+				try {
+					prio=Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca el numero de prioridad"));
+					aye2=false;
+					}
+				catch(Exception e) {
+					JOptionPane.showMessageDialog(null, "Error, no ha introducido un numero de prioridad.");
+					aye2=true;
+					}
+			
+			}while(aye2==true);
+				
 			dvc.add(new Device(nombre, prio));
-			j=JOptionPane.showOptionDialog(null, 
-					"Desea agregar mas dispositivos?", 
-				    "Pregunta", 
+			j=JOptionPane.showOptionDialog(null, "Desea agregar mas dispositivos?", "Pregunta", 
 				    JOptionPane.YES_NO_OPTION, 
 				    JOptionPane.QUESTION_MESSAGE, 
 				    null, 
 				    options, 
 				    options[0]);
+			
 		}while(j==JOptionPane.YES_OPTION);
 		
+		
+		
+		
 		nombres = new String[dvc.size()];
-		for(int i=1; i<dvc.size();i++){
+		for(int i=1; i<dvc.size();i++)
+		{
 			Device tmpDevice = dvc.get(i);
 			nombres[i] = tmpDevice.getName();
 		}
 		
 		ArrayList<Interruption> itrs = new ArrayList<Interruption>();
-		int main=Integer.parseInt(JOptionPane.showInputDialog(null, "Cuanto demora el programa principal?"));
+		
+		do 
+		{
+			try {
+				main=Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca la duración del Programa Principal?"));
+				aye2=false;
+				}
+			catch(Exception e)
+				{
+				JOptionPane.showMessageDialog(null, "Disculpe. Debe ingresar un valor de tiempo. Intentelo otra vez.");
+				aye2=true;
+				}
+		}while(aye2==true);
+		
+		
 		itrs.add(new Interruption(0, dvc.get(0), main));
 		do{
 			JFrame frame = new JFrame();
@@ -62,13 +100,34 @@ public class Main {
 				j++;
 			}while(aye!=true);
 	    aye=false;
-			int time = Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el segundo en el que se hara la interrupcion:"));
-
-			int duration = Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte cuantos segundos tardara la interrupcion:"));
-
+	    
+	    
+	    do 
+	    {
+	    	try {
+	    		time = Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el segundo en el que se hara la interrupcion:"));
+	    		aye2=false;
+	    		}
+	    	catch(Exception e) {
+	    		JOptionPane.showMessageDialog(null, "Error, introduzca el segundo en el que se hara la interrupcion");
+	    		aye2=true;
+	    		}
+	    }while(aye2==true);
+	    
+	    do {
+			try {
+				duration = Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte la cantidad de segundos que tardara la interrupcion:"));
+				aye2=false;
+			}
+			catch(Exception e) {
+				JOptionPane.showMessageDialog(null, "Error, introduzca la cantidad de segundos que tarda la interrupción");
+				aye2=true; 
+			}
+	    }while(aye2==true);
+	    
 			itrs.add(new Interruption(time, dvc.get(interNum), duration));
 			j=JOptionPane.showOptionDialog(null, 
-				"Desea agregar mas interrupcciones?", 
+				"¿Desea agregar mas interrupcciones?", 
 			    "Pregunta", 
 			    JOptionPane.YES_NO_OPTION, 
 			    JOptionPane.QUESTION_MESSAGE, 
@@ -79,12 +138,31 @@ public class Main {
 		
 		InterruptionSolver iSolver = new InterruptionSolver(itrs);
 		iSolver.solveSimulation();
-		int cantTiemposBitacora =Integer.parseInt(JOptionPane.showInputDialog(null, "Â¿Cuantos tiempos necesita en la bitacora?"));
+		do {
+			try{
+			cantTiemposBitacora =Integer.parseInt(JOptionPane.showInputDialog(null, "¿Cuantos tiempos necesita en la bitacora?"));
+			aye2=false;
+			}
+			catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Error, introduzca un valor numerico.");
+			}
+		}while(aye2==true);
+		
+		
 		int tiempo[] = new int[cantTiemposBitacora];
 		for(int i =0; i<cantTiemposBitacora; i++)
 		{
-			tiempo[i]=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el tiempo "+(i+1)+" de la bitacora"));
-		}
+			do{
+				try{
+					tiempo[i]=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el tiempo "+(i+1)+" de la bitacora"));
+					aye2=false;
+					}
+				catch(Exception e) {
+				JOptionPane.showMessageDialog(null, "Error, introduzca valores numericos");
+				aye2=true;
+				}
+		}while(aye2==true);
+		
 		matrixResult mr = new matrixResult(iSolver.generarBitacora(tiempo), new String[]{"Tiempo","Area","I(S/N)","Rango","Tiempo restante"});
 		mr.showme();
 		
@@ -97,9 +175,7 @@ public class Main {
             	frame.add(scroll,BorderLayout.CENTER);
             	frame.getContentPane().add(scroll);
             	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    			frame.setVisible(true);
-            }
-});
+    			frame.setVisible(true);}});
 	}
-
+	}
 }
