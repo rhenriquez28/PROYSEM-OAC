@@ -25,7 +25,7 @@ public class Main {
 		
 		
 		dvc.add(new Device("main", Integer.MAX_VALUE-1));
-		//Itroducci�n de dispositivos y su prioridad
+		//Itroducción de dispositivos y su prioridad
 		do{
 			nombre=JOptionPane.showInputDialog(null, "Introduzca el nombre de los un dispositivo que va a formar parte de la simulacion");
 			

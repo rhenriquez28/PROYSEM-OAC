@@ -21,9 +21,9 @@ import javax.swing.JScrollPane;
 
 public class InterruptionSolverAnimation extends JPanel {
 	private Timer timer;
-	private static final int TIMERDELAY=100;
+	private static final int TIMERDELAY=1000;
 	private int time;
-	private ArrayList<Graphics> rectangles;
+	
 	private ArrayList<FocusWindow> fwindow;
 	private ArrayList<Device> uniqueDevices;
 	private Map<Device,Integer[]> devicePositions;
@@ -43,7 +43,7 @@ public class InterruptionSolverAnimation extends JPanel {
 				
 			}
 		};
-		rectangles = new ArrayList<Graphics>();
+	
 		time = 0;
 		setLayout(new BorderLayout());
 		timer=new Timer(TIMERDELAY,redrawTask);
@@ -73,7 +73,7 @@ public class InterruptionSolverAnimation extends JPanel {
 	public void paintComponent(Graphics g) {
 	   super.paintComponent(g);
 	   Graphics2D g2 = (Graphics2D) g;
-	   g2.setColor(Color.RED);
+	   g2.setColor(new Color(22,160,133));
 	   g2.setFont(new Font("TimesRoman", Font.PLAIN,24));
 	   int i=0;
 	   int lastStringWidth =0;
@@ -122,8 +122,11 @@ public class InterruptionSolverAnimation extends JPanel {
 					{
 						Device idev = ifw.getInterruption().getDevice();
 						Integer[] pos = devicePositions.get(idev);
-						g2.setColor(Color.BLUE);
+						g2.setColor(new Color(44,62,80));
 						g2.fillRect(pos[0], (time+4)*20, pos[1], 20);
+						g2.setColor(new Color(22,160,133));
+						g2.drawRect(pos[0], (time+4)*20, pos[1], 20);
+
 					}
 				}
 			}
