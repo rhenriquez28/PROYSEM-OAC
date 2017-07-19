@@ -25,7 +25,7 @@ public class Main {
 		
 		
 		dvc.add(new Device("main", Integer.MAX_VALUE-1));
-		//Itroducción de dispositivos y su prioridad
+		//Itroducciï¿½n de dispositivos y su prioridad
 		do{
 			nombre=JOptionPane.showInputDialog(null, "Introduzca el nombre de los un dispositivo que va a formar parte de la simulacion");
 			
@@ -67,7 +67,7 @@ public class Main {
 		do 
 		{
 			try {
-				main=Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca la duración del Programa Principal?"));
+				main=Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca la duraciï¿½n del Programa Principal?"));
 				aye2=false;
 				}
 			catch(Exception e)
@@ -120,14 +120,14 @@ public class Main {
 				aye2=false;
 			}
 			catch(Exception e) {
-				JOptionPane.showMessageDialog(null, "Error, introduzca la cantidad de segundos que tarda la interrupción");
+				JOptionPane.showMessageDialog(null, "Error, introduzca la cantidad de segundos que tarda la interrupciï¿½n");
 				aye2=true; 
 			}
 	    }while(aye2==true);
 	    
 			itrs.add(new Interruption(time, dvc.get(interNum), duration));
 			j=JOptionPane.showOptionDialog(null, 
-				"¿Desea agregar mas interrupcciones?", 
+				"ï¿½Desea agregar mas interrupcciones?", 
 			    "Pregunta", 
 			    JOptionPane.YES_NO_OPTION, 
 			    JOptionPane.QUESTION_MESSAGE, 
@@ -140,7 +140,7 @@ public class Main {
 		iSolver.solveSimulation();
 		do {
 			try{
-			cantTiemposBitacora =Integer.parseInt(JOptionPane.showInputDialog(null, "¿Cuantos tiempos necesita en la bitacora?"));
+			cantTiemposBitacora =Integer.parseInt(JOptionPane.showInputDialog(null, "ï¿½Cuantos tiempos necesita en la bitacora?"));
 			aye2=false;
 			}
 			catch (Exception e) {
@@ -154,7 +154,7 @@ public class Main {
 		{
 			do{
 				try{
-					tiempo[i]=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el tiempo "+(i+1)+" de la bitacora"));
+					tiempo[i]=Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte el tiempo "+(i)+" de la bitacora"));
 					aye2=false;
 					}
 				catch(Exception e) {
@@ -162,7 +162,7 @@ public class Main {
 				aye2=true;
 				}
 		}while(aye2==true);
-		
+		}
 		matrixResult mr = new matrixResult(iSolver.generarBitacora(tiempo), new String[]{"Tiempo","Area","I(S/N)","Rango","Tiempo restante"});
 		mr.showme();
 		
@@ -176,6 +176,7 @@ public class Main {
             	frame.getContentPane().add(scroll);
             	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     			frame.setVisible(true);}});
-	}
+	
+		
 	}
 }
